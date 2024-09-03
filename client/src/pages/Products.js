@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import ProductShimmerUI from '../components/ProductShimmerUI'
 import { addToCart } from '../features/Cart/CartSlice'
 import { useDispatch, useSelector } from 'react-redux'
-
+import axios from 'axios'
 function ProductContainer() {
   const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
@@ -14,7 +14,7 @@ function ProductContainer() {
     const fetchData = async () => {
       setIsLoading(true)
       try {
-        const response = await CustomFetch.get('/allproducts', {
+        const response = await axios.get('/allproducts', {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
         setProducts(response.data.products)

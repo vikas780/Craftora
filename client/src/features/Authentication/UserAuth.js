@@ -5,7 +5,7 @@ import {
   removeUserFromLocalStorage,
   getUserFromLocalStorage,
 } from '../../utils/LocalStorage'
-import CustomFetch from '../../utils/CustomFetch'
+import axios from 'axios'
 
 const token = localStorage.getItem('token')
 const initialState = {
@@ -17,7 +17,7 @@ export const registerUser = createAsyncThunk(
   'user/registerUser',
   async (user, thunkAPI) => {
     try {
-      const response = await CustomFetch.post('/auth/register', user)
+      const response = await axios.post('/auth/register', user)
       return response.data
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.msg)
@@ -28,7 +28,7 @@ export const loginUser = createAsyncThunk(
   'user/loginUser',
   async (user, thunkAPI) => {
     try {
-      const resp = await CustomFetch.post('/auth/login', user)
+      const resp = await axios.post('/auth/login', user)
       console.log('RESP.data', resp.data)
       return resp.data
     } catch (error) {
