@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
-import axios from 'axios'
+import CustomFetch from '../utils/CustomFetch'
 
 const ArtisanForm = ({ onClose, addProduct }) => {
   const [formData, setFormData] = useState({
@@ -13,7 +13,7 @@ const ArtisanForm = ({ onClose, addProduct }) => {
 
   const addNewProduct = async (productDetails) => {
     try {
-      const response = await axios.post('/product', productDetails, {
+      const response = await CustomFetch.post('/product', productDetails, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('token')}`,
