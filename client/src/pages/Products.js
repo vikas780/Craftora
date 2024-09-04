@@ -13,9 +13,7 @@ function ProductContainer() {
     const fetchData = async () => {
       setIsLoading(true)
       try {
-        const response = await CustomFetch.get('/allproducts', {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-        })
+        const response = await CustomFetch.get('/allproducts')
         setProducts(response.data.products)
         setIsLoading(false)
       } catch (error) {
