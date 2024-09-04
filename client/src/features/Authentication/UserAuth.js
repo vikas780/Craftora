@@ -44,6 +44,7 @@ const UserAuth = createSlice({
     logoutUser: (state, { payload }) => {
       state.user = ''
       removeUserFromLocalStorage()
+      toast.success('Sucessfully logged out ')
       if (payload) {
         toast.success(payload)
       }
@@ -59,7 +60,7 @@ const UserAuth = createSlice({
         state.isLoading = false
         state.user = user
         addUserToLocalStorage(user, token)
-        toast.success(`Hello There ${user.name}`)
+        toast.success(`Hello ${user.name}`)
       })
       .addCase(registerUser.rejected, (state, { payload }) => {
         state.isLoading = false
