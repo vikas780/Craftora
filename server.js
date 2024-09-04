@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const ConnectDb = require('./db/ConnectDb')
 const AuthMiddleware = require('./middleware/Auth')
+const AuthorizeRoleMiddleware = require('./middleware/RoleAuth')
 require('dotenv').config()
 const path = require('path')
 const morgan = require('morgan')
@@ -30,7 +31,12 @@ app.use(express.static(path.resolve(currDirname, 'client/build')))
 // API routes
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1', productListingRouter)
-app.use('/api/v1', AuthMiddleware, artisanRouter)
+app.use(
+  '/api/v1',
+  AuthMiddleware,
+  AuthorizeRoleMiddleware('artisan'),
+  artisanRouter
+)
 
 // Handle all other routes
 app.get('*', (req, res) => {

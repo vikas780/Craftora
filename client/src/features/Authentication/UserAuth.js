@@ -29,7 +29,7 @@ export const loginUser = createAsyncThunk(
   async (user, thunkAPI) => {
     try {
       const resp = await CustomFetch.post('/auth/login', user)
-      console.log('RESP.data', resp.data)
+
       return resp.data
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.msg)
@@ -42,7 +42,7 @@ const UserAuth = createSlice({
   initialState,
   reducers: {
     logoutUser: (state, { payload }) => {
-      state.user = null
+      state.user = ''
       removeUserFromLocalStorage()
       if (payload) {
         toast.success(payload)
@@ -64,7 +64,6 @@ const UserAuth = createSlice({
       .addCase(registerUser.rejected, (state, { payload }) => {
         state.isLoading = false
         toast.error(payload)
-        console.log(payload)
       })
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true
@@ -74,13 +73,12 @@ const UserAuth = createSlice({
         state.isLoading = false
         state.user = user
         addUserToLocalStorage(user, token)
-        console.log('User object from login', user)
+
         toast.success(`Welcome Back ${user.name}`)
       })
       .addCase(loginUser.rejected, (state, { payload }) => {
         state.isLoading = false
         toast.error(payload)
-        console.log(payload)
       })
   },
 })

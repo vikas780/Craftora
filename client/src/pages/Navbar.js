@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { logoutUser } from '../features/Authentication/UserAuth'
+import { clearCart } from '../features/Cart/CartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadCartFromLocalStorage } from '../features/Cart/CartSlice'
 
@@ -9,10 +10,17 @@ const Navbar = () => {
   const { user } = useSelector((state) => state.UserAuth)
   const [toggle, setToggle] = useState(false)
 
+  //Role based access
+
   //For small screen navigation
   const handelToggle = () => {
     setToggle(!toggle)
   }
+  const handleLogout = () => {
+    dispatch(logoutUser())
+    dispatch(clearCart())
+  }
+
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(loadCartFromLocalStorage())
@@ -111,18 +119,22 @@ const Navbar = () => {
                 Cart
               </NavLink>
             </li>
-            <li className='max-lg:border-b max-lg:py-3 px-3'>
-              <NavLink
-                to='/artisan'
-                className={({ isActive }) =>
-                  `hover:text-[#007bff] font-bold block text-base ${
-                    isActive ? 'text-[#007bff]' : 'text-gray-600'
-                  }`
-                }
-              >
-                Artisan
-              </NavLink>
-            </li>
+            {user.role === 'artisan' || '' ? (
+              <li className='max-lg:border-b max-lg:py-3 px-3'>
+                <NavLink
+                  to='/artisan'
+                  className={({ isActive }) =>
+                    `hover:text-[#007bff] font-bold block text-base ${
+                      isActive ? 'text-[#007bff]' : 'text-gray-600'
+                    }`
+                  }
+                >
+                  Artisan
+                </NavLink>
+              </li>
+            ) : (
+              <></>
+            )}
           </ul>
         </div>
 
@@ -130,7 +142,7 @@ const Navbar = () => {
           {user ? (
             <NavLink
               to='/register'
-              onClick={() => dispatch(logoutUser())}
+              onClick={handleLogout}
               className=' px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-[#007bff] bg-[#007bff] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#007bff] sm:px-2 sm:text-xs'
             >
               Logout
