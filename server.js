@@ -4,14 +4,18 @@ const ConnectDb = require('./db/ConnectDb')
 const AuthMiddleware = require('./middleware/Auth')
 require('dotenv').config()
 const path = require('path')
+const morgan = require('morgan')
 
 // Security package
 const cors = require('cors')
-
 // Routers
 const authRouter = require('./routes/Auth')
 const productListingRouter = require('./routes/ProductListing')
 const artisanRouter = require('./routes/Artisan')
+
+if (process.env.NODE_ENV !== 'production') {
+  app.use(morgan('dev'))
+}
 
 // Middleware
 app.use(express.json())
