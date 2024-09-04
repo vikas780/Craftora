@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { ProductsList } from './Products'
 import ProductShimmerUI from '../components/ProductShimmerUI'
 import ArtisanForm from '../components/ArtisanForm'
-import axios from 'axios'
+import CustomFetch from '../utils/CustomFetch'
 
 const Artisan = () => {
   const [products, setProducts] = useState([])
@@ -22,7 +22,7 @@ const Artisan = () => {
     const fetchData = async () => {
       setIsLoading(true)
       try {
-        const response = await axios.get('/artisan', {
+        const response = await CustomFetch.get('/artisan', {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
         setProducts(response.data.products)
