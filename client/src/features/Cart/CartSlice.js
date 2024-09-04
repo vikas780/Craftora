@@ -21,7 +21,7 @@ const CartSlice = createSlice({
     },
     addToCart: (state, action) => {
       const { sendProduct } = action.payload
-      console.log('action.payload', action.payload)
+
       if (!sendProduct || !sendProduct._id) {
         console.error('Product or product.id is undefined')
         return

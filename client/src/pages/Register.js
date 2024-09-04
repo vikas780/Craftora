@@ -7,7 +7,7 @@ const initialState = {
   name: '',
   email: '',
   password: '',
-  role: '',
+  role: 'customer',
   isMember: true,
 }
 const Register = () => {
@@ -30,14 +30,14 @@ const Register = () => {
 
     if (isMember) {
       dispatch(loginUser({ email: values.email, password: values.password }))
-      console.log(`email: ${values.email} password: ${values.password}`)
-      toast.success('Sucesfully logged the values')
+      // console.log(`email: ${values.email} password: ${values.password}`)
+      // toast.success('Sucesfully logged the values')
       return
     }
     dispatch(registerUser({ name, email, password, role }))
-    console.log(
-      `name: ${values.name} email: ${values.email} password: ${values.password} role: ${values.role}`
-    )
+    // console.log(
+    //   `name: ${values.name} email: ${values.email} password: ${values.password} role: ${values.role}`
+    // )
   }
   const toggle = () => {
     setValues({ ...values, isMember: !values.isMember })
@@ -45,7 +45,7 @@ const Register = () => {
   useEffect(() => {
     if (user) {
       setTimeout(() => {
-        navigate('/artisan')
+        navigate('/products')
       }, 2000)
     }
   }, [user, navigate])
