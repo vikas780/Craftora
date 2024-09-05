@@ -6,6 +6,8 @@ const AuthorizeRoleMiddleware = require('./middleware/RoleAuth')
 require('dotenv').config()
 const path = require('path')
 const morgan = require('morgan')
+const fileUpload = require('express-fileupload')
+const cloudinary = require('cloudinary').v2
 
 // Security package
 const cors = require('cors')
@@ -18,9 +20,15 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'))
 }
 
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+})
 // Middleware
 app.use(express.json())
 app.use(cors())
+app.use(fileUpload({ useTempFiles: true }))
 
 // Get the current directory name
 const currDirname = __dirname

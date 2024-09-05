@@ -87,8 +87,8 @@ const Navbar = () => {
               <NavLink
                 to='/'
                 className={({ isActive }) =>
-                  `hover:text-[#007bff] font-bold block text-base ${
-                    isActive ? 'text-[#007bff]' : 'text-gray-600'
+                  `hover:text-indigo-500 font-bold block text-base ${
+                    isActive ? 'text-indigo-600' : 'text-gray-600'
                   }`
                 }
               >
@@ -99,8 +99,8 @@ const Navbar = () => {
               <NavLink
                 to='/products'
                 className={({ isActive }) =>
-                  `hover:text-[#007bff] font-bold block text-base ${
-                    isActive ? 'text-[#007bff]' : 'text-gray-600'
+                  `hover:text-indigo-500 font-bold block text-base ${
+                    isActive ? 'text-indigo-600' : 'text-gray-600'
                   }`
                 }
               >
@@ -111,8 +111,8 @@ const Navbar = () => {
               <NavLink
                 to='/cart'
                 className={({ isActive }) =>
-                  `hover:text-[#007bff] font-bold block text-base ${
-                    isActive ? 'text-[#007bff]' : 'text-gray-600'
+                  `hover:text-indigo-500 font-bold block text-base ${
+                    isActive ? 'text-indigo-600' : 'text-gray-600'
                   }`
                 }
               >
@@ -124,8 +124,8 @@ const Navbar = () => {
                 <NavLink
                   to='/artisan'
                   className={({ isActive }) =>
-                    `hover:text-[#007bff] font-bold block text-base ${
-                      isActive ? 'text-[#007bff]' : 'text-gray-600'
+                    `hover:text-indigo-500 font-bold block text-base ${
+                      isActive ? 'text-indigo-600' : 'text-gray-600'
                     }`
                   }
                 >
@@ -143,14 +143,14 @@ const Navbar = () => {
             <NavLink
               to='/register'
               onClick={handleLogout}
-              className=' px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-[#007bff] bg-[#007bff] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#007bff] sm:px-2 sm:text-xs'
+              className=' px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-[#007bff] bg-[#007bff] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-indigo-500 sm:px-2 sm:text-xs'
             >
               Logout
             </NavLink>
           ) : (
             <NavLink
               to='/register'
-              className='px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-[#007bff] bg-[#007bff] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#007bff] sm:px-2 sm:text-xs'
+              className='px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-[#007bff] bg-[#007bff] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-indigo-500 sm:px-2 sm:text-xs'
             >
               Login
             </NavLink>

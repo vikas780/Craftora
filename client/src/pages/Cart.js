@@ -39,7 +39,7 @@ const Cart = () => {
   }
 
   return (
-    <div className='font-sans max-w-[1350px] max-md:max-w-[45rem] mx-auto p-4'>
+    <div className='max-w-[1380px] max-md:max-w-[45rem] mx-auto'>
       <h1 className='text-2xl font-extrabold text-gray-800'>Your Cart</h1>
       <div className='grid md:grid-cols-3 gap-4 mt-8'>
         <div className='md:col-span-2 space-y-4'>
