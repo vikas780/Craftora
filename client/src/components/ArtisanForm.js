@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { toast } from 'react-toastify'
-import CustomFetch from '../utils/CustomFetch'
+import { addNewProduct, imageUpload } from '../features/Artisan/Dashboard'
 
 const ArtisanForm = ({ onClose, addProduct }) => {
   const [formData, setFormData] = useState({
@@ -11,21 +10,6 @@ const ArtisanForm = ({ onClose, addProduct }) => {
     imageFile: null,
   })
 
-  const addNewProduct = async (productDetails) => {
-    try {
-      const response = await CustomFetch.post('/product', productDetails, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      })
-      toast.success('Product created successfully')
-      console.log('Add New Product Data', response.data)
-    } catch (error) {
-      console.error('Error creating product:', error)
-    }
-  }
-
   const handleChange = (e) => {
     const { name, value, type, files } = e.target
     setFormData((prevData) => ({
@@ -34,10 +18,13 @@ const ArtisanForm = ({ onClose, addProduct }) => {
     }))
   }
 
+  const handleImage = () => {
+    imageUpload(formData, setFormData)
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     const { name, description, price, image } = formData
-    console.log('New Product Data', formData)
 
     addNewProduct({ name, description, price, image })
     onClose()
@@ -119,25 +106,6 @@ const ArtisanForm = ({ onClose, addProduct }) => {
               required
             />
           </div>
-
-          <div>
-            <label
-              htmlFor='image'
-              className='block text-sm font-medium text-gray-700'
-            >
-              Image Link
-            </label>
-            <input
-              type='url'
-              id='image'
-              name='image'
-              value={formData.image}
-              onChange={handleChange}
-              className='mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500'
-              placeholder='Enter image URL'
-            />
-          </div>
-
           <div>
             <label
               htmlFor='imageFile'
@@ -145,20 +113,29 @@ const ArtisanForm = ({ onClose, addProduct }) => {
             >
               Upload Image
             </label>
-            <input
-              type='file'
-              id='imageFile'
-              name='imageFile'
-              onChange={handleChange}
-              className='mt-1 block w-full text-sm text-gray-500
+            <div className='flex'>
+              <input
+                type='file'
+                id='imageFile'
+                name='imageFile'
+                onChange={handleChange}
+                className=' mt-1 block w-full text-sm text-gray-500
                 file:mr-4 file:py-2 file:px-4
                 file:rounded-full file:border-0
                 file:text-sm file:font-semibold
                 file:bg-indigo-50 file:text-indigo-700
                 hover:file:bg-indigo-100'
-            />
+              />
+              <button
+                type='button'
+                onClick={handleImage}
+                className=' flex justify-center w-16 py-2 px-4 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+              >
+                Upload
+              </button>
+            </div>
           </div>
-          {/* Submit Button */}
+
           <div>
             <button
               type='submit'

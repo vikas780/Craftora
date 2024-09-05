@@ -49,7 +49,7 @@ const Artisan = () => {
         <div>
           <button
             onClick={handleModalToggle}
-            className='px-4 py-2 text-white bg-[#007bff] rounded-md shadow-md hover:bg-[#3286e0] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-[#255e9b]'
+            className='px-4 py-2 text-white bg-indigo-600 rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-indigo-500'
           >
             Create Product
           </button>
